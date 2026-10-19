@@ -1,0 +1,2 @@
+[console_scripts]
+punchroll = punchroll.cli:main

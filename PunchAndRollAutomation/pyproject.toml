@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "punchroll"
+version = "0.2.0"
+description = "Cut and master narration from a transcript that Claude has marked up."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "David Shapiro" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "soundfile>=0.12",
+    "sherpa-onnx>=1.10",
+    "num2words>=0.5.12",
+    "lameenc>=1.6",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+docx = ["python-docx>=1.1"]
+test = ["pytest>=7"]
+all = ["python-docx>=1.1", "pytest>=7"]
+# Optional and large, so not part of "all": the spectrogram pictures and the trained listener in the scorecard.
+pictures = ["matplotlib>=3.7"]
+listen = ["torch>=2.1", "torchaudio>=2.1"]
+
+[project.scripts]
+punchroll = "punchroll.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
